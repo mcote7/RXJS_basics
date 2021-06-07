@@ -153,17 +153,33 @@
 
 // from DOM Events 
 
-import {fromEvent} from 'rxjs';
+// import {fromEvent} from 'rxjs';
 
-const observer = {
-  next: val => console.log("next", val),
-  error: err => console.log("error", err),
-  complete: () => console.log("complete")
-};
+// const observer = {
+//   next: val => console.log("next", val),
+//   error: err => console.log("error", err),
+//   complete: () => console.log("complete")
+// };
 
-const source$ = fromEvent(document, 'click');
+// const source$ = fromEvent(document, 'click');
 
-source$.subscribe(observer);
+// source$.subscribe(observer);
 
 
+// const subOne = source$.subscribe(observer);
+// const subTwo = source$.subscribe(observer);
 
+// setTimeout(() => {
+//   /*
+//    *  For long running observables we need to make sure to clean
+//    *  them up when we are finished to prevent memory leaks and
+//    *  unintended behavior. In this case, we are cleaning up
+//    *  one subscription but not the other, leaving it active.
+//    *  We will learn different techniques to automate this
+//    *  process in an upcoming lesson.
+//    */
+//   console.log('unsubscribing');
+//   subOne.unsubscribe();
+// }, 3000);
+
+// 
