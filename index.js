@@ -183,3 +183,83 @@
 // }, 3000);
 
 // 
+
+// begin 
+// import { of, range } from 'rxjs';
+
+// const observer = {
+//     next: val => console.log('next', val),
+//     error: err => console.log('error', err),
+//     complete: () => console.log('complete!')
+// };
+
+/*
+ * Emits each item you provide in sequence, synchronously.
+ * of literally just loops through the items and emits them,
+ * there is no flattening involved. For instance, if you pass an
+ * array the entire array will be emitted, not each item within
+ * the array.
+ */
+// const source$ = of(1,2,3,4,5);
+
+// console.log('proving');
+// source$.subscribe(observer);
+// console.log('this is synchronous');
+
+/*
+ * If you just want to emit numbers between a specific range
+ * you could also use the range operator instead.
+ */
+// console.log('proving');
+// range(1,5).subscribe(observer);
+// console.log('this is synchronous');
+
+// marble diagrams =>
+
+// [input$:] --(1)--(2)--(3)--(4)--(5)----->
+
+// --- map(val => val * 10) ---
+
+// [output$:] --(10)--(20)--(30)--(40)--(50)----->
+
+// begin 
+// import { of, fromEvent } from 'rxjs';
+// import { map, pluck, mapTo } from 'rxjs/operators';
+
+// of(1,2,3,4,5).pipe(
+//   map(value => value * 10)
+// ).subscribe(console.log);
+
+// const keyup$ = fromEvent(document, 'keyup');
+
+/*
+ * One popular use case is mapping to a property (or multiple properties)
+ * on an object. In this case you can use map like below...
+ */
+// const keycode$ = keyup$.pipe(
+//   map((event) => event.code)
+// );
+
+/*
+ * Or you could use pluck, which accepts the property name you
+ * wish to emit. You can also 'pluck' nested properties, 
+ * for instance: pluck('target', 'value'). I would use whichever
+ * you feel is easiest to read (regarding map for single prop vs pluck).
+ */
+// const keycodeWithPluck$ = keyup$.pipe(
+//   pluck('code')
+// );
+
+/*
+ * For scenarios where you ALWAYS want to map to the same,
+ * static value, you can use mapTo instead. This emits the value
+ * you supply on any emissions from the source observable. We will see
+ * a few examples of where this can be useful in upcoming lessons.
+ */
+// const pressed$ = keyup$.pipe(
+//   mapTo('Key Pressed!')
+// );
+
+// keycodeWithPluck$.subscribe(console.log);
+
+
